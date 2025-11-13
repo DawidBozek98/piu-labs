@@ -63,7 +63,7 @@ a:hover {
   background: #d1d5db;
 }
 
-/* Karty logowanei itd*/
+/* Karty logowanie itd. */
 .card {
   background: var(--card);
   border-radius: 8px;
@@ -98,7 +98,17 @@ a:hover {
 .form-card {
   width: min(500px, 100%);
   margin: 0 auto;
-  background: #fff;
+
+  /* zmienne motywu dla karty */
+  --card-bg: #ffffff;
+  --card-text: #111827;
+  --field-border: #d1d5db;
+  --input-bg: #ffffff;
+  --input-text: #111111;
+  --fieldset-border: #d1d5db;
+
+  background: var(--card-bg);
+  color: var(--card-text);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
@@ -107,7 +117,7 @@ a:hover {
   z-index: 1;
 }
 
-/* przełącznik motywu */
+/* przełącznik motywu  */
 .theme-toggle {
   position: absolute;
   opacity: 0;
@@ -135,6 +145,15 @@ a:hover {
   z-index: 1;
 }
 
+/* domyślnie jasny motyw */
+.theme-label .icon-sun,
+.theme-label .icon-moon {
+  display: none;
+}
+.theme-label .icon-sun {
+  display: inline;
+}
+
 /* Pola konkursowe */
 .contest-form .field {
   display: grid;
@@ -156,9 +175,9 @@ a:hover {
   width: 100%;
   padding: 0.55rem 0.75rem;
   border-radius: 6px;
-  border: 1px solid #d1d5db;
-  background: #fff;
-  color: #111;
+  border: 1px solid var(--field-border);
+  background: var(--input-bg);
+  color: var(--input-text);
   font-size: 16px;
   box-sizing: border-box;
 }
@@ -170,7 +189,7 @@ a:hover {
 
 /* Publikacja pracy */
 .contest-form fieldset {
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--fieldset-border);
   border-radius: 6px;
   padding: 0.75rem 1rem;
   margin: 0;
@@ -178,11 +197,11 @@ a:hover {
 
 .contest-form legend {
   font-weight: 600;
-  color: #111;
+  color: var(--card-text);
   padding: 0 0.4rem;
 }
 
-/* Radio i checkbox*/
+/* Radio i checkbox */
 .choice {
   display: flex;
   align-items: center;
@@ -237,29 +256,60 @@ a:hover {
   background: #45a049;
 }
 
-/* Motyw ciemny – tylko karta */
+/* Motyw domyślnie jasny */
+
+/* ręcznie ciemny motyw */
 .theme-toggle:checked + .form-card {
-  background: #1f2937;
-  color: #f9fafb;
+  --card-bg: #1f2937;
+  --card-text: #f9fafb;
+  --field-border: #374151;
+  --input-bg: #111827;
+  --input-text: #f9fafb;
+  --fieldset-border: #374151;
 }
 
-.theme-toggle:checked + .form-card .contest-form input[type='text'],
-.theme-toggle:checked + .form-card .contest-form input[type='email'],
-.theme-toggle:checked + .form-card .contest-form input[type='date'],
-.theme-toggle:checked + .form-card .contest-form input[type='number'],
-.theme-toggle:checked + .form-card .contest-form input[list],
-.theme-toggle:checked + .form-card .contest-form input[type='color'],
-.theme-toggle:checked + .form-card .contest-form select {
-  background: #111827;
-  color: #f9fafb;
-  border-color: #374151;
+/* Ikonka do ręcznego */
+.theme-toggle:checked + .form-card .theme-label .icon-sun {
+  display: none;
+}
+.theme-toggle:checked + .form-card .theme-label .icon-moon {
+  display: inline;
 }
 
-.theme-toggle:checked + .form-card fieldset {
-  border-color: #374151;
-}
+/* Motyw systemowy: dark */
+@media (prefers-color-scheme: dark) {
+  /* domyślnie dostosuj się do motywu systemowego */
+  .form-card {
+    --card-bg: #1f2937;
+    --card-text: #f9fafb;
+    --field-border: #374151;
+    --input-bg: #111827;
+    --input-text: #f9fafb;
+    --fieldset-border: #374151;
+  }
 
-.theme-toggle:checked + .form-card .contest-form label,
-.theme-toggle:checked + .form-card legend {
-  color: #f9fafb;
+  /* domyślnie ikona księżyca */
+  .theme-label .icon-sun {
+    display: none;
+  }
+  .theme-label .icon-moon {
+    display: inline;
+  }
+
+  /* ręcznie na jasny */
+  .theme-toggle:checked + .form-card {
+    --card-bg: #ffffff;
+    --card-text: #111827;
+    --field-border: #d1d5db;
+    --input-bg: #ffffff;
+    --input-text: #111111;
+    --fieldset-border: #d1d5db;
+  }
+
+  .theme-toggle:checked + .form-card .theme-label .icon-sun {
+    display: inline;
+  }
+  .theme-toggle:checked + .form-card .theme-label .icon-moon {
+    display: none;
+  }
 }
